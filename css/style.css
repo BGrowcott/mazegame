@@ -1,0 +1,54 @@
+#mazeArea{
+    display: flex;
+    flex-wrap: wrap;
+    width: 500px;
+    height: 550px;
+}
+
+#mazeContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    margin: auto;
+    height: 560px;
+    width: 510px;
+    background-color: rgb(61, 61, 61);
+}
+
+.mazeTile{
+    width: 50px;
+    height: 50px;
+    background-color: azure;
+}
+
+.mazeTileWall{
+ background-color: brown;
+ box-shadow: -1px -1px 3px black;
+}
+
+#player {
+    box-shadow: 0px 0px 5px black;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    position: relative;
+    top: -50px;
+    left: 0px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#enemy{
+    box-shadow: 0px 0px 5px black;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    position: relative;
+    top: -50px;
+    left: 400px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
