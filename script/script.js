@@ -45,6 +45,7 @@ $("#mazeArea").append($('<div id="enemy"></div>'));
 
 $("html").keydown(playerMovement);
 
+const player = $("#player")
 // css positions
 let playerCSSVertical = -50;
 let playerCSSHorizontal = 0;
@@ -61,7 +62,7 @@ function playerMovement(e) {
       y++;
       return;
     }
-    $("#player").css("top", playerCSSVertical);
+    player.css("top", playerCSSVertical);
   }
   if (e.key == "ArrowDown") {
     playerCSSVertical += 50;
@@ -71,7 +72,7 @@ function playerMovement(e) {
       y += -1;
       return;
     }
-    $("#player").css("top", playerCSSVertical);
+    player.css("top", playerCSSVertical);
   }
   if (e.key == "ArrowRight") {
     playerCSSHorizontal += 50;
@@ -81,7 +82,7 @@ function playerMovement(e) {
       x += -1;
       return;
     }
-    $("#player").css("left", playerCSSHorizontal);
+    player.css("left", playerCSSHorizontal);
   }
   if (e.key == "ArrowLeft") {
     playerCSSHorizontal += -50;
@@ -91,62 +92,59 @@ function playerMovement(e) {
       x += 1;
       return;
     }
-    $("#player").css("left", playerCSSHorizontal);
+    player.css("left", playerCSSHorizontal);
   }
 }
 
 // enemy
-
+const enemy = $("#enemy");
 let enemyCSSVertical = -50;
 let enemyCSSHorizontal = 400;
 // maze array positions
 let enemyX = 9;
 let enemyY = 10;
 
-
-
 async function enemyMovement() {
   enemyCSSVertical = -50;
   enemyCSSHorizontal = 400;
   enemyX = 9;
   enemyY = 10;
-  await enemyUp()
-  await enemyLeft()
-  await enemyDown()
-  await enemyRight()
-  }
-
+  await enemyUp();
+  await enemyLeft();
+  await enemyDown();
+  await enemyRight();
+}
 
 // move up
-async function enemyUp(){
+async function enemyUp() {
   setTimeout(() => {
-  console.log('up')
-  enemyCSSVertical += -50;
-  $("#enemy").css("top", enemyCSSVertical);
-}, 1000)
+    console.log("up");
+    enemyCSSVertical += -50;
+    enemy.css("top", enemyCSSVertical);
+  }, 1000);
 }
 
 //move left
-async function enemyLeft(){
+async function enemyLeft() {
   setTimeout(() => {
-    console.log('left')
+    console.log("left");
     enemyCSSHorizontal += -50;
-    $("#enemy").css("left", enemyCSSHorizontal);
-  }, 1000)
+    enemy.css("left", enemyCSSHorizontal);
+  }, 1000);
 }
 
-async function enemyDown(){
+async function enemyDown() {
   setTimeout(() => {
-    console.log('down')
-  enemyCSSVertical += 50;
-  $("#enemy").css("top", enemyCSSVertical);
-}, 1000)
+    console.log("down");
+    enemyCSSVertical += 50;
+    enemy.css("top", enemyCSSVertical);
+  }, 1000);
 }
 
-async function enemyRight(){
+async function enemyRight() {
   setTimeout(() => {
-    console.log('right')
+    console.log("right");
     enemyCSSHorizontal += 50;
-    $("#enemy").css("left", enemyCSSHorizontal);
-  }, 1000)
+    enemy.css("left", enemyCSSHorizontal);
+  }, 1000);
 }
