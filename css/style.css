@@ -50,6 +50,57 @@
     position: relative;
     top: -50px;
     left: 400px;
-    margin-left: 5px;
+    margin-left: 10px;
+    margin-top: 5px;
+    transition: 0.5s;
+}
+
+#enemy2{
+    box-shadow: 0px 0px 5px black;
+    border-radius: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    position: relative;
+    top: -300px;
+    left: 300px;
+    margin-left: 10px;
+    margin-top: 5px;
+    transition: 0.5s;
+}
+
+#gameOver{
+    margin: auto;
+    bottom: 400px;
+    position: relative;
+    background-color: aliceblue;
+    text-align: center;
+    padding: 50px;
+    border: 2px solid black;
+    display: none;
+    width: 200px;
+}
+
+#blueKeyImage {
+    width:40px;
+    margin-left: 10px;
+    position: relative;
+    top: -550px;
+    left: -150px;
+}
+
+#openDoorImage, #closedDoorImage{
+    width: 40px;
+    position: relative;
+    bottom: 100px;
+    left: 50px;
+    margin-left: 10px;
     margin-top: 5px;
 }
+
+#openDoor {
+    display: none;
+    position: relative;
+    left: 50px;
+}
+

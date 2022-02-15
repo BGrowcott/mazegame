@@ -25,27 +25,29 @@ levels[0] = {
   theme: "default",
 };
 
-// function Game(id) {
-//     this.el = document.getElementById(id)
-//     this.tileTypes = ['floor','wall'];
-// }
+const mazeArea = $("#mazeArea")
 
 // draw the maze
 for (let i = 0; i < levels[0].maze1.length; i++) {
   for (let j = 0; j < levels[0].maze1[0].length; j++)
     if (levels[0].maze1[i][j] === 0) {
-      $("#mazeArea").append($(`<div class="mazeTile"></div>`));
+      mazeArea.append($(`<div class="mazeTile"></div>`));
     } else {
-      $("#mazeArea").append($(`<div class="mazeTile mazeTileWall"></div>`));
+      mazeArea.append($(`<div class="mazeTile mazeTileWall"></div>`));
     }
 }
 
-$("#mazeArea").append($('<div id="player"></div>'));
-$("#mazeArea").append($('<div id="enemy"></div>'));
+mazeArea.append($('<div id="player"></div>'));
+mazeArea.append($('<div id="enemy"></div>'));
+mazeArea.append($('<div id="enemy2"></div>'));
+mazeArea.append($('<div id="blueKey"><img id="blueKeyImage" src="images/key.png" alt="blue key"></div>'));
+mazeArea.append($('<div id="closedDoor"><img id="closedDoorImage" src="images/double-door.png" alt="closed door"></div>'));
+mazeArea.append($('<div id="openDoor"><img id="openDoorImage" src="images/opened-double-door.png" alt="open door"></div>'));
+
 
 $("html").keydown(playerMovement);
 
-const player = $("#player")
+const player = $("#player");
 // css positions
 let playerCSSVertical = -50;
 let playerCSSHorizontal = 0;
@@ -63,6 +65,7 @@ function playerMovement(e) {
       return;
     }
     player.css("top", playerCSSVertical);
+    killed();
   }
   if (e.key == "ArrowDown") {
     playerCSSVertical += 50;
@@ -73,6 +76,7 @@ function playerMovement(e) {
       return;
     }
     player.css("top", playerCSSVertical);
+    killed();
   }
   if (e.key == "ArrowRight") {
     playerCSSHorizontal += 50;
@@ -83,6 +87,7 @@ function playerMovement(e) {
       return;
     }
     player.css("left", playerCSSHorizontal);
+    killed();
   }
   if (e.key == "ArrowLeft") {
     playerCSSHorizontal += -50;
@@ -93,6 +98,7 @@ function playerMovement(e) {
       return;
     }
     player.css("left", playerCSSHorizontal);
+    killed();
   }
 }
 
@@ -113,38 +119,109 @@ async function enemyMovement() {
   await enemyLeft();
   await enemyDown();
   await enemyRight();
+  enemyMovement()
 }
 
+const wait = (delay, ...args) =>
+  new Promise((resolve) => setTimeout(resolve, delay, ...args));
 // move up
 async function enemyUp() {
-  setTimeout(() => {
-    console.log("up");
+  return wait(1000).then(() => {
     enemyCSSVertical += -50;
+    enemyY--
     enemy.css("top", enemyCSSVertical);
-  }, 1000);
+    killed()
+  });
 }
 
 //move left
 async function enemyLeft() {
-  setTimeout(() => {
-    console.log("left");
+  return wait(1000).then(()=>{
     enemyCSSHorizontal += -50;
+    enemyX--
     enemy.css("left", enemyCSSHorizontal);
-  }, 1000);
+    killed()
+  })
 }
 
 async function enemyDown() {
-  setTimeout(() => {
-    console.log("down");
+  return wait(1000).then(()=>{
     enemyCSSVertical += 50;
+    enemyY++
     enemy.css("top", enemyCSSVertical);
-  }, 1000);
+    killed()
+  })
 }
 
 async function enemyRight() {
-  setTimeout(() => {
-    console.log("right");
+  return wait(1000).then(()=>{
     enemyCSSHorizontal += 50;
+    enemyX++
     enemy.css("left", enemyCSSHorizontal);
-  }, 1000);
+    killed()
+  });
 }
+
+const gameOverModal = $('#gameOver')
+const gameContainer = $('#mazeContainer')
+
+function killed() {
+  if (enemyX === x && enemyY === y) {
+    gameOverModal.css('display', 'block')
+    gameContainer.css('opacity', '0.3')
+    player.css('opacity', '0')
+  }
+  if (enemy2X === x && enemy2Y === y) {
+    gameOverModal.css('display', 'block')
+    gameContainer.css('opacity', '0.3')
+    player.css('opacity', '0')
+  }
+}
+
+$('#tryAgain').click(()=>{location.reload()})
+
+enemyMovement()
+const enemy2 = $("#enemy2");
+let enemy2CSSVertical = -300;
+let enemy2CSSHorizontal = 300;
+// maze array positions
+let enemy2X = 8;
+let enemy2Y = 5;
+
+async function enemy2MovementUp() {
+  return wait(800).then(()=>{
+    enemy2CSSVertical += -50;
+    enemy2Y--
+    enemy2.css("top", enemy2CSSVertical);
+    killed()
+  })
+}
+
+async function enemy2MovementDown() {
+  return wait(800).then(()=>{
+    enemy2CSSVertical += 50;
+    enemy2Y++
+    enemy2.css("top", enemy2CSSVertical);
+    killed()
+  })
+}
+
+async function enemy2Movement(){
+  for (let i=0;i<3;i++){
+    await enemy2MovementUp()}
+  for (let i=0;i<3;i++){
+    await enemy2MovementDown()}
+  enemy2Movement()
+}
+enemy2Movement()
+
+levels[0].maze1[9][5] = 1
+const keyChecker = setInterval(()=>{
+if (x===0 && y===0){
+  $('#blueKey').remove()
+  $('#closedDoor').css('display', 'none')
+  $('#openDoor').css('display', 'block')
+  levels[0].maze1[9][5] = 0
+  clearInterval(keyChecker)
+}
+}, 500)
