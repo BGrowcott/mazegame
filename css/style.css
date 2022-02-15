@@ -53,6 +53,7 @@
     margin-left: 10px;
     margin-top: 5px;
     transition: 0.5s;
+    z-index: 1;
 }
 
 #enemy2{
@@ -104,3 +105,24 @@
     left: 50px;
 }
 
+#blueKeyImage2{
+    width: 40px;
+    margin-left: 10px;
+}
+
+#blueKeyImage2{
+    position: relative;
+    top: -50px;
+    left: 200px;
+}
+
+#door2Image{
+    width: 40px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+#door2Image{
+    position: relative;
+    top: -450px;
+}

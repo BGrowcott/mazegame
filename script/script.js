@@ -43,6 +43,9 @@ mazeArea.append($('<div id="enemy2"></div>'));
 mazeArea.append($('<div id="blueKey"><img id="blueKeyImage" src="images/key.png" alt="blue key"></div>'));
 mazeArea.append($('<div id="closedDoor"><img id="closedDoorImage" src="images/double-door.png" alt="closed door"></div>'));
 mazeArea.append($('<div id="openDoor"><img id="openDoorImage" src="images/opened-double-door.png" alt="open door"></div>'));
+mazeArea.append($('<div id="blueKey2"><img id="blueKeyImage2" src="images/key.png" alt="blue key"></div>'));
+mazeArea.append($('<div id="door2"><img id="door2Image" src="images/double-door.png" alt="closed door"></div>'));
+
 
 
 $("html").keydown(playerMovement);
@@ -215,13 +218,25 @@ async function enemy2Movement(){
 }
 enemy2Movement()
 
+//key1
 levels[0].maze1[9][5] = 1
 const keyChecker = setInterval(()=>{
 if (x===0 && y===0){
-  $('#blueKey').remove()
+  $('#blueKeyImage').css('opacity', '0')
   $('#closedDoor').css('display', 'none')
   $('#openDoor').css('display', 'block')
   levels[0].maze1[9][5] = 0
   clearInterval(keyChecker)
 }
-}, 500)
+}, 100)
+
+//key2
+levels[0].maze1[2][6] = 1
+const key2Checker = setInterval(()=>{
+if (x===9 && y===10){
+  $('#blueKeyImage2').css('opacity', '0')
+  $('#door2Image').attr('src', 'images/opened-double-door.png')
+  levels[0].maze1[2][6] = 0
+  clearInterval(key2Checker)
+}
+}, 100)
