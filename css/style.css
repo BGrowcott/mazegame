@@ -70,7 +70,7 @@
     transition: 0.5s;
 }
 
-#gameOver{
+#gameOver, #victory{
     margin: auto;
     bottom: 400px;
     position: relative;
@@ -125,4 +125,17 @@
 #door2Image{
     position: relative;
     top: -450px;
+}
+
+#targetImage{
+    width: 40px;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+#target{
+    position: relative;
+    top: -550px;
+    left: 100px;
+
 }

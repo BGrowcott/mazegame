@@ -45,7 +45,7 @@ mazeArea.append($('<div id="closedDoor"><img id="closedDoorImage" src="images/do
 mazeArea.append($('<div id="openDoor"><img id="openDoorImage" src="images/opened-double-door.png" alt="open door"></div>'));
 mazeArea.append($('<div id="blueKey2"><img id="blueKeyImage2" src="images/key.png" alt="blue key"></div>'));
 mazeArea.append($('<div id="door2"><img id="door2Image" src="images/double-door.png" alt="closed door"></div>'));
-
+mazeArea.append($('<div id="target"><img id="targetImage" src="images/target.png" alt="target"></div>'));
 
 
 $("html").keydown(playerMovement);
@@ -181,7 +181,7 @@ function killed() {
   }
 }
 
-$('#tryAgain').click(()=>{location.reload()})
+$('.tryAgain').click(()=>{location.reload()})
 
 enemyMovement()
 const enemy2 = $("#enemy2");
@@ -240,3 +240,12 @@ if (x===9 && y===10){
   clearInterval(key2Checker)
 }
 }, 100)
+
+const winModal = $('#victory')
+const completeChecker = setInterval(()=>{
+  if (x===9 && y===0){
+    winModal.css('display', 'block')
+    gameContainer.css('opacity', '0.3')
+    player.css('opacity', '0')
+  }
+},100)
